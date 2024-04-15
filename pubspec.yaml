@@ -1,0 +1,58 @@
+name: flutter_firebase
+description: "A new Flutter project."
+publish_to: 'none' #
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.2.1
+  shared_preferences: ^2.2.2
+  easy_localization: ^3.0.5
+  realm: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/translations/
+
+  fonts:
+    - family : Lato
+      fonts:
+        - asset: assets/fonts/Lato-BlackItalic.ttf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/Lato-Black.ttf
+          weight: 300
+        - asset: assets/fonts/Lato-BoldItalic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 300
+        - asset: assets/fonts/Lato-Italic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Lato-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Lato-LightItalic.ttf
+          style: italic
+        - asset: assets/fonts/Lato-Regular.ttf
+          weight: 300
+        - asset: assets/fonts/Lato-Thin.ttf
+        - asset: assets/fonts/Lato-ThinItalic.ttf
+          style: italic
