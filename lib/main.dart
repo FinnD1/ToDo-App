@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       locale: context.locale,
       supportedLocales: context.supportedLocales,
-      home: const RegisterScreen(),
+      home: const MainPage(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/task/create_task_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -48,8 +49,7 @@ class _MainPageState extends State<MainPage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentPage,
         onTap: (index) {
-          if(index==2)
-            return;//khong lam j ca
+          if (index == 2) return; //khong lam j ca
           setState(() {
             _currentPage = index;
           });
@@ -133,7 +133,7 @@ class _MainPageState extends State<MainPage> {
           borderRadius: BorderRadius.circular(32),
         ),
         child: IconButton(
-            onPressed: () {},
+            onPressed: _onShowCreateTask,
             icon: Icon(
               Icons.add,
               size: 32,
@@ -142,5 +142,16 @@ class _MainPageState extends State<MainPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  void _onShowCreateTask() {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) {
+          return Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: const CreateTaskPage());
+        });
   }
 }
