@@ -7,9 +7,9 @@ part of 'category_realm_entities.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
-class _CategoryRealmEntities extends $_CategoryRealmEntities
+class CategoryRealmEntities extends $CategoryRealmEntities
     with RealmEntity, RealmObjectBase, RealmObject {
-  _CategoryRealmEntities(
+  CategoryRealmEntities(
     ObjectId id,
     String name, {
     int? iconCodePoint,
@@ -23,7 +23,7 @@ class _CategoryRealmEntities extends $_CategoryRealmEntities
     RealmObjectBase.set(this, 'iconColorHex', iconColorHex);
   }
 
-  _CategoryRealmEntities._();
+  CategoryRealmEntities._();
 
   @override
   ObjectId get id => RealmObjectBase.get<ObjectId>(this, 'id') as ObjectId;
@@ -57,19 +57,19 @@ class _CategoryRealmEntities extends $_CategoryRealmEntities
       RealmObjectBase.set(this, 'iconColorHex', value);
 
   @override
-  Stream<RealmObjectChanges<_CategoryRealmEntities>> get changes =>
-      RealmObjectBase.getChanges<_CategoryRealmEntities>(this);
+  Stream<RealmObjectChanges<CategoryRealmEntities>> get changes =>
+      RealmObjectBase.getChanges<CategoryRealmEntities>(this);
 
   @override
-  _CategoryRealmEntities freeze() =>
-      RealmObjectBase.freezeObject<_CategoryRealmEntities>(this);
+  CategoryRealmEntities freeze() =>
+      RealmObjectBase.freezeObject<CategoryRealmEntities>(this);
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
-    RealmObjectBase.registerFactory(_CategoryRealmEntities._);
-    return const SchemaObject(ObjectType.realmObject, _CategoryRealmEntities,
-        '_CategoryRealmEntities', [
+    RealmObjectBase.registerFactory(CategoryRealmEntities._);
+    return const SchemaObject(ObjectType.realmObject, CategoryRealmEntities,
+        'CategoryRealmEntities', [
       SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
       SchemaProperty('name', RealmPropertyType.string),
       SchemaProperty('iconCodePoint', RealmPropertyType.int, optional: true),

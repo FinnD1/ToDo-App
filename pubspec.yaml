@@ -16,7 +16,8 @@ dependencies:
   shared_preferences: ^2.2.2
   easy_localization: ^3.0.5
   realm: ^1.6.2
-  flutter_iconpicker: ^3.2.4
+  flutter_iconpicker: ^3.4.4
+  flutter_colorpicker: ^1.0.3
 #  // dung ban moi nhat bi loi k generate ra dc
 
 dev_dependencies:
@@ -32,6 +33,7 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/
+    - assets/realm/bundle.realm
 
   fonts:
     - family : Lato

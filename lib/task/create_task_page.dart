@@ -29,7 +29,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   Widget _buildBodyPage() {
     return Form(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -118,11 +118,29 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             child: Row(
               children: [
                 IconButton(
-                    onPressed: () {}, icon: Image.asset("assets/images/timer.png",width: 24,height: 24,fit: BoxFit.fill,)),
+                    onPressed: () {},
+                    icon: Image.asset(
+                      "assets/images/timer.png",
+                      width: 24,
+                      height: 24,
+                      fit: BoxFit.fill,
+                    )),
                 IconButton(
-                    onPressed: () {}, icon: Image.asset("assets/images/flag.png",width: 24,height: 24,fit: BoxFit.fill,)),
+                    onPressed: () {},
+                    icon: Image.asset(
+                      "assets/images/flag.png",
+                      width: 24,
+                      height: 24,
+                      fit: BoxFit.fill,
+                    )),
                 IconButton(
-                    onPressed: () {}, icon: Image.asset("assets/images/tag.png",width: 24,height: 24,fit: BoxFit.fill,)),
+                    onPressed: () {},
+                    icon: Image.asset(
+                      "assets/images/tag.png",
+                      width: 24,
+                      height: 24,
+                      fit: BoxFit.fill,
+                    )),
               ],
             ),
           ),
