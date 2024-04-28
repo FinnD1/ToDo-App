@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/task/create_task_page.dart';
+import 'package:flutter_firebase/ui/home_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,9 +20,7 @@ class _MainPageState extends State<MainPage> {
     super.initState();
 
     pages = [
-      Container(
-        color: Colors.red,
-      ),
+      const HomeScreen(),
       Container(
         color: Colors.green,
       ),

@@ -33,7 +33,6 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/
-    - assets/realm/bundle.realm
 
   fonts:
     - family : Lato
