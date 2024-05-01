@@ -2,18 +2,45 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_firebase/domain/authentication_repository/authentication_repository.dart';
+import 'package:flutter_firebase/login/bloc/login_cubit.dart';
 import 'package:flutter_firebase/welcome/welcome_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Builder(
+        builder: (context) {
+          return BlocProvider(
+            create: (context) {
+              final authenticationRepository=context.read<AuthenticationRepository>();
+              return LoginCubit(authenticationRepository:authenticationRepository);
+            },
+            child: LoginScreen(),
+          );
+        }
+      ),
+    );
+  }
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  final _formKey =GlobalKey<FormState>();
-  var _validateMode= AutovalidateMode.disabled;
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  var _emailTextController=TextEditingController();
+  var _passTextController=TextEditingController();
+  var _validateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Container(
             margin: EdgeInsets.only(top: 10),
             child: TextFormField(
+              controller: _emailTextController,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                   hintText: "Enter your Username",
@@ -108,22 +136,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     borderSide: BorderSide(width: 1, color: Colors.white),
                     borderRadius: BorderRadius.circular(6),
                   )),
-              validator: (String? value){
-                if(value==null || value.isEmpty)
-                  {
-                    return "Email is required";//yeu cau nhap email khong the rong
-                  }
-                final bool emailValid =
-                RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value);
-                if(emailValid){
-                  return null;
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return "Email is required"; //yeu cau nhap email khong the rong
                 }
-                else{
+                final bool emailValid = RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value);
+                if (emailValid) {
+                  return null;
+                } else {
                   return "Email khong hop le";
                 }
                 return null;
-            },
+              },
             ),
           ),
         ],
@@ -148,6 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Container(
             margin: EdgeInsets.only(top: 10),
             child: TextFormField(
+              controller: _passTextController,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                   hintText: "***********",
@@ -156,15 +183,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     borderSide: BorderSide(width: 1, color: Colors.white),
                     borderRadius: BorderRadius.circular(6),
                   )),
-              validator: (String? value){
-                if(value ==null || value.isEmpty)
-                  {
-                    return "Password is required";
-                  }
-                if(value.length<6)
-                  {
-                    return "Password phai nhap 6 ki tu tro len";
-                  }
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return "Password is required";
+                }
+                if (value.length < 6) {
+                  return "Password phai nhap 6 ki tu tro len";
+                }
                 return null;
               },
             ),
@@ -200,7 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   //container x text x container
-  Widget _buildRegisterOrSplit(){
+  Widget _buildRegisterOrSplit() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 31),
       height: 48,
@@ -213,7 +238,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: Colors.white,
             ),
           ),
-          const Text("Or",style: TextStyle(color: Colors.white,fontSize: 16),),
+          const Text(
+            "Or",
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
           Expanded(
             child: Container(
               height: 1,
@@ -231,7 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       children: [
         Container(
           padding: EdgeInsets.symmetric(horizontal: 24),
-          margin: EdgeInsets.only(top: 29,bottom: 20),
+          margin: EdgeInsets.only(top: 29, bottom: 20),
           width: double.infinity,
           height: 48,
           child: ElevatedButton(
@@ -246,7 +274,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/images/google.png",height: 24,width: 24,fit: BoxFit.fill,),
+                  Image.asset(
+                    "assets/images/google.png",
+                    height: 24,
+                    width: 24,
+                    fit: BoxFit.fill,
+                  ),
                   SizedBox(
                     width: 10,
                   ),
@@ -277,7 +310,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/images/apple.png",height: 24,width: 24,fit: BoxFit.fill,),
+                  Image.asset(
+                    "assets/images/apple.png",
+                    height: 24,
+                    width: 24,
+                    fit: BoxFit.fill,
+                  ),
                   SizedBox(
                     width: 10,
                   ),
@@ -317,17 +355,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void _onHandedLoginSubmit(){
-    if(_validateMode== AutovalidateMode.disabled)//check realtime validate
-      {
-        setState(() {
-          _validateMode=AutovalidateMode.always;
-        });
-      }
-    final isValid=_formKey.currentState!.validate();
-    if (isValid){
+  void _onHandedLoginSubmit() {
+    final loginCubit=BlocProvider.of<LoginCubit>(context);
+
+    final email=_emailTextController.text;
+    final pass=_passTextController.text;
+    loginCubit.login(email, pass);
+    return;
+
+
+    if (_validateMode == AutovalidateMode.disabled) //check realtime validate
+    {
+      setState(() {
+        _validateMode = AutovalidateMode.always;
+      });
+    }
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
       //Call API lofin , call Firebase login
-    }else{
+    } else {
       // khong lam j ca
     }
   }

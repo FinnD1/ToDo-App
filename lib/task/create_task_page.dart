@@ -1,6 +1,8 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firebase/category/category_list_page.dart';
 
 class CreateTaskPage extends StatefulWidget {
   const CreateTaskPage({super.key});
@@ -12,6 +14,10 @@ class CreateTaskPage extends StatefulWidget {
 class _CreateTaskPageState extends State<CreateTaskPage> {
   final _nameTaskTextController = TextEditingController();
   final _descTaskTextController = TextEditingController();
+  // final CalendarDatePicker2 _
+  List<DateTime?> _singleDatePickerValueWithDefaultValue = [
+    DateTime.now().add(const Duration(days: 1)),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +115,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
   Widget _buildTaskActionField() {
     return Container(
-      margin: EdgeInsets.all(15),
+      margin: const EdgeInsets.symmetric(vertical: 15),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,7 +124,31 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             child: Row(
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) {
+                            return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: CalendarDatePicker2(
+                                    config: CalendarDatePicker2Config(
+                                      firstDayOfWeek: 1,
+                                      calendarType: CalendarDatePicker2Type.range,
+                                      selectedDayTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+                                      selectedDayHighlightColor: Colors.purple[800],
+                                      centerAlignModePicker: true,
+                                      customModePickerIcon: SizedBox(height: 10,),
+                                    ),
+                                    value: _singleDatePickerValueWithDefaultValue,
+                                    onValueChanged: (dates) => setState(() {
+                                      _singleDatePickerValueWithDefaultValue = dates;
+                                      print(dates);
+                                      print(_singleDatePickerValueWithDefaultValue);
+                                    })
+                                ));
+                          });
+                    },
                     icon: Image.asset(
                       "assets/images/timer.png",
                       width: 24,
@@ -126,7 +156,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       fit: BoxFit.fill,
                     )),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: _showDialogChooseCategory,
                     icon: Image.asset(
                       "assets/images/flag.png",
                       width: 24,
@@ -149,5 +179,11 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         ],
       ),
     );
+  }
+
+  void _showDialogChooseCategory(){
+    showGeneralDialog(context: context, pageBuilder: (_,__,___){
+      return CategoryListPage();
+    });
   }
 }

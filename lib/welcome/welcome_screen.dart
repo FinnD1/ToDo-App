@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/register/register_screen.dart';
+import 'package:flutter_firebase/login/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final bool isFirstTimeInstall;
@@ -106,7 +106,7 @@ class WelcomeScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24),
       child: ElevatedButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
         },
         style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFF8875FF),
